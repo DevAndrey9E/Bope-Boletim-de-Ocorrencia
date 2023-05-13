@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - A Pen by Paulo Andrei </title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Boletim de Ocorrência</title>
+</head>
+  <style>
+    #pause-button{position:absolute; top:20px;}
+    #resultado{color:black; position:absolute; background-color: white; border-radius:3px; width:180px;height:290; top:540px; font-family:Arial; font-size:8px; text-align:center;right:109px;border-radius:3px}
+    #qualificacao{border:none;color:red; border-radius:3px; font-weight:bold;font-size:9px;padding;10px;}
+  
+    #btnApagar{position:absolute; top:680px; left:100px;border:none;background-color:#2E2E2E;color:white; font-family:Arial; font-weight:bold; font-size:12px; border-radius:20px}
+  
+  #baixar {position:absolute; top:680px; left:190px;border:none;background-color:#2E2E2E;color:white; font-family:Arial; font-weight:bold; font-size:12px; border-radius:20px}
+
+    #botao{position:absolute; top:500px; left:100px;border:none;background-color:#2E2E2E;color:White; font-family:Arial; font-weight:bold; font-size:12px; border-radius:3px;}
+    .imagem {
+      width: 40px; /* Defina a largura desejada */
+      height: auto; position:absolute;right:167px;; top:-18px;} 
+    body{background-color:black; min-height: 180vh; ;}
+   h1{font-family:Arial; color:White; font-size:18px; position:absolute; right:75px; top:25px}
+   
+    #boForm{font-family:Arial; font-size:10px; color:white;width: 80px; /* Exemplo de largura */
+      height: auto; position:relative;left:30px; top:25px;}
+   
+    .quadradoCinza{background-color:#2E2E2E; border-radius:20px; width: 250px; height: 350px; position:absolute; left:65px;}
+</style>
+<body>
+ 
+  <img class="imagem" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIV8_QjcXO5LAlekQ3GgXq4_R8tIkwCznGUw&usqp=CAU">
+  <h1>BOLETIM DE OCORRÊNCIA</h1><br><br><br>
+<div class="quadradoCinza">  
+  <form id="boForm">
+    <label for="nome">Nome do indivíduo:</label>
+    <input type="text" id="nome" name="nome"><br><br> 
+    
+    <label for="local">Local do fato:</label>
+    <input type="text" id="local" name="local"><br><br>
+    
+    <label for="qualificacao">Qualificação:</label>
+    <select id="qualificacao" name="qualificacao">
+      <option value="homicidio">Homicídio</option>
+      <option value="desacato">Desacato</option>
+      <option value="trafico de drogas">Tráfico de Drogas</option>
+      <option value="trafico de armas">Tráfico de Armas</option>
+      <option value="Porte ilegal de arma">Porte Ilegal de Arma</option>
+      <option value="Tentativa de Homicídio">Tentativa de Homicidio</option>
+    </select>
+    
+    <label for="data">Data do fato:</label>
+    <input type="date" id="data" name="data">
+    
+    <label for="hora">Hora do fato:</label>
+    <input type="time" id="hora" name="hora"><br><br>
+    
+    <label for="depoimento">Depoimento:</label><br>
+    <textarea id="depoimento" name="depoimento" rows="2" cols="20"></textarea></div><br><br>
+
+    <input id="botao"type="button" value="GERAR BOLETIM DE OCORRÊNCIA" onclick="gerarBO()">
+  </form>
+
+  <div id="resultado"></div>
+   <button id="baixar"onclick="downloadInnerHtmlAsImage()">Download</button>
+
+  <button id="btnApagar"onclick="apagarDiv()">Apagar</button>
+<div id="video-container"></div>
+
+  <script>
+    function gerarBO() {
+      var nome = document.getElementById("nome").value;
+      var local = document.getElementById("local").value;
+      var qualificacao = document.getElementById("qualificacao").value;
+      var data = document.getElementById("data").value;
+      var hora = document.getElementById("hora").value;
+      var depoimento = document.getElementById("depoimento").value;
+
+    
+      
+      var numeroBO = Math.floor(Math.random() * 10000) + 1; // Gera um número aleatório entre 1 e 10000
+      var boText = "<strong>10° BPM BOPE Madout2-Boletim de Ocorrência n° </strong> <em>" + numeroBO + "</em><br><br><br>";
+boText += " Por meio da prisão em flagrante, a equipe BOPE prendeu em flagrante de delito o individúo: <em>" + nome + "</em><br>";
+boText += "o mesmo preso no endereço <em>" + local + "</em><br>";
+boText += "pelo flagrante de delito de: <em>" + qualificacao + "</em><br>";
+boText += "em: <em>" + data + "</em><br>";
+boText += "às: </em> " + hora + "</em><br>";
+boText += " em depoimento foi exposto que: <em>" + depoimento + "</em><br>";
+
+      document.getElementById("resultado").innerHTML= boText;}
+
+      function apagarDiv() {
+      document.getElementById("resultado").innerHTML = "";
+    }
+  </script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+<script>function downloadInnerHtmlAsImage() {
+  var element = document.getElementById('resultado'); // substitua 'seu-elemento' pelo ID do elemento desejado
+
+  html2canvas(element).then(function(canvas) {
+    var link = document.createElement('a');
+    link.href = canvas.toDataURL(); // gera a imagem como uma URL de dados
+    link.download = 'Boletim de ocorrência.png'; // define o nome do arquivo de download
+    link.click();
+  });
+}
+  </script>
+  </body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
